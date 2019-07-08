@@ -8,10 +8,6 @@ spec:
   rules:
     - http:
         paths:
-          - path: /
-            backend:
-              serviceName: portal-nsw-service
-              servicePort: 3000
           - path: /portalNSW/
             backend:
               serviceName: portal-nsw-service
