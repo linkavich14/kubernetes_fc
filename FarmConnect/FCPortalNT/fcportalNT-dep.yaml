@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portal-nt-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: portal-nt-dep
+  template:
+    metadata:
+      labels:
+        app: portal-nt-dep
+    spec:
+      containers:
+      - name: farmconnectportal
+        image: docker.io/linkavich14/farmconnectportal:latest
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "50m"
+          limits:
+            memory: "512Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: CATALINA_OPTS
+          value: "-Duser.timezone=Australia/Darwin -Dorg.apache.el.parser.COERCE_TO_ZERO=true -Drubicon.app.forceLoadByResource=true -Xms512m -Xmx1024m"
